@@ -14,6 +14,8 @@ class Executor {
   byte nregister[NREGISTERS] = {0};
   ushort iregister = 0;
   ushort pc = START_INSTRUCTIONS;
+  
+  byte delayTimer = 0, soundTimer = 0;
 
   byte pixels[screen::W_WIDTH * screen::W_HEIGHT / emulation::SPRITE_WIDTH] = {0};
 

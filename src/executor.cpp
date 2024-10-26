@@ -1,5 +1,6 @@
 #include "executor.h"
 #include "constants.h"
+#include "parser.h"
 #include "util.h"
 #include <cmath>
 #include <cstring>
@@ -165,6 +166,9 @@ int Executor::execute(ushort operation, Instruction instruction,
     for (int i = 0; i < 3; i++)
       memory[iregister + i] = (nregister[vx] / ((int)pow(10, 2 - i))) % 10;
     break;
+  case Instruction::STORE_DTIMER_VX:
+    nregister[vx] = delayTimer;
+    break;
   case Instruction::STORE_VX_KEY:
     if (lastKey == 0x00)
       increment = false;
@@ -175,6 +179,12 @@ int Executor::execute(ushort operation, Instruction instruction,
       increment = false;
     else
       waitingKey = 0x00;
+    break;
+  case Instruction::SET_DTIMER_VX:
+    delayTimer = nregister[vx];
+    break;
+  case Instruction::SET_STIMER_VX:
+    soundTimer = nregister[vx];
     break;
   case Instruction::STORE_VX_RANGE:
     for (int i = 0; i <= vx; i++)

@@ -30,8 +30,14 @@ Instruction Parser::read_reg_binary_operations(ushort operation) {
 
 Instruction Parser::read_F_operations(ushort operation) {
   switch (operation & 0xF0FF) {
+  case 0xF007:
+    return Instruction::STORE_DTIMER_VX;
   case 0xF00A:
     return Instruction::STORE_VX_KEY;
+  case 0xF015:
+    return Instruction::SET_DTIMER_VX;
+  case 0xF018:
+    return Instruction::SET_STIMER_VX;
   case 0xF01E:
     return Instruction::ADD_INDEX_VX;
   case 0xF029:
